@@ -140,10 +140,6 @@ button{
 <div class="rain" id="rain"></div>
 <div class="petals" id="petals"></div>
 
-<!-- 🎶 AUDIO LOCAL (ESTO ES LO QUE FUNCIONA) -->
-<audio id="bgmusic" loop preload="auto">
-    <source src="romeo.mp3" type="audio/mpeg">
-</audio>
 
 <!-- EP1 -->
 <div class="scene active" id="s1">
@@ -152,7 +148,11 @@ button{
         <p>No quiero incomodarte ni que esto se malinterprete.</p>
         <p>Solo quiero explicarme bien.</p>
 
-        <button onclick="start()">empezar</button>
+      	<button onclick="start()">empezar</button>
+
+<audio id="bgmusic" loop>
+    <source src="romeo.mp3" type="audio/mpeg">
+</audio>
     </div>
 </div>
 
@@ -237,7 +237,16 @@ button{
 </div>
 
 <script>
+function start(){
+    const music = document.getElementById("bgmusic");
+    music.volume = 0.5;
 
+    music.play().catch(err => {
+        console.log("bloqueado por navegador");
+    });
+
+    next();
+}
 /* lluvia */
 const rain=document.getElementById("rain");
 
