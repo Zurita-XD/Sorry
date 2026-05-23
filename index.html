@@ -6,163 +6,285 @@
 <title>Perdón Carla 💔</title>
 
 <style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
 body{
-background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
-font-family:Segoe UI,sans-serif;
-color:white;
-margin:0;
+    overflow:hidden;
+    color:white;
 }
 
-.container{
-width:90%;
-max-width:1100px;
-margin:auto;
-padding:40px 0;
+/* 🌌 fondo */
+.bg{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,79,154,0.25), transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(106,92,255,0.18), transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(0,212,255,0.12), transparent 55%),
+        linear-gradient(135deg,#070a14,#0f1630,#05060c);
+    z-index:-5;
 }
 
-.hero{
-text-align:center;
-padding:50px 20px;
+/* 🌧️ lluvia */
+.rain{
+    position:fixed;
+    width:100%;
+    height:100%;
+    z-index:-3;
 }
 
-.hero h1{
-font-size:4rem;
-color:#ff9bc6;
+.drop{
+    position:absolute;
+    width:1px;
+    height:60px;
+    background:linear-gradient(transparent, rgba(255,255,255,0.35));
+    animation:fall linear infinite;
 }
 
-.card{
-background:rgba(255,255,255,0.08);
-padding:30px;
-border-radius:25px;
-margin:30px 0;
+@keyframes fall{
+    0%{transform:translateY(-100vh);}
+    100%{transform:translateY(100vh);}
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
+/* 🌸 pétalos */
+.petals{
+    position:fixed;
+    width:100%;
+    height:100%;
+    z-index:-2;
 }
 
-.item{
-background:rgba(255,255,255,0.05);
-padding:20px;
-border-radius:20px;
+.petal{
+    position:absolute;
+    width:12px;
+    height:10px;
+    background:rgba(255,182,193,0.6);
+    border-radius:50%;
+    animation:float 7s linear infinite;
 }
 
-.item img{
-width:100%;
-border-radius:15px;
-height:340px;
-object-fit:cover;
+@keyframes float{
+    0%{transform:translateY(-10vh);}
+    100%{transform:translateY(110vh);}
 }
 
-.button{
-display:block;
-margin:40px auto;
-padding:18px 40px;
-background:#ff4f9a;
-color:white;
-border:none;
-border-radius:50px;
-font-size:1rem;
-cursor:pointer;
+/* escenas */
+.scene{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position:absolute;
+
+    opacity:0;
+    transform:scale(1.05);
+    filter:blur(8px);
+    transition:1s ease;
 }
 
-.hidden{
-display:none;
+.scene.active{
+    opacity:1;
+    transform:scale(1);
+    filter:blur(0);
+    z-index:2;
 }
 
-footer{
-text-align:center;
-opacity:0.7;
-padding-bottom:30px;
+/* caja */
+.box{
+    width:90%;
+    max-width:600px;
+    padding:32px;
+    border-radius:22px;
+    background:rgba(255,255,255,0.07);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,0.12);
+}
+
+h1,h2{
+    color:#ff9ecf;
+}
+
+p{
+    margin-top:10px;
+    line-height:1.6;
+    opacity:0.92;
+}
+
+button{
+    margin-top:16px;
+    padding:12px 22px;
+    border:none;
+    border-radius:30px;
+    background:#ff4f9a;
+    color:white;
+    cursor:pointer;
+}
+
+.no{
+    background:#3b3b52;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="bg"></div>
+<div class="rain" id="rain"></div>
+<div class="petals" id="petals"></div>
 
-<div class="hero">
-<h1>Perdón, Carla 🖤</h1>
+<!-- 🎶 ROMEO SANTOS (DISCULPA MODE) -->
+<audio autoplay loop>
+    <source src="https://dl.sndup.net/q7z2/Romeo%20Santos%20-%20Eres%20M%C3%ADa.mp3">
+</audio>
 
-<p>
-Sé que se vio inmaduro y entiendo por qué te molestó.
-Solo estaba nervioso y mi cerebro decidió arruinar todo 😭
-</p>
+<!-- EP1 -->
+<div class="scene active" id="s1">
+    <div class="box">
+        <h1>Perdón, Carla 🖤</h1>
+        <p>No quiero incomodarte ni que esto se malinterprete.</p>
+        <p>Solo quiero explicarme bien.</p>
+        <button onclick="next()">empezar</button>
+    </div>
 </div>
 
-<div class="card">
+<!-- EP2 -->
+<div class="scene" id="s2">
+    <div class="box">
+        <h2>Lo que pasó</h2>
 
-<h2>📺 Memes dramáticos del arrepentimiento</h2>
+        <p>Te dije que me gustabas…</p>
+        <p>y luego dije que me habían retado.</p>
 
-<div class="grid">
+        <p style="opacity:0.7">
+            ahora que lo pienso si fue inmaduro, no lo pense muy bien
+        </p>
 
-<div class="item">
-<img src="images/boys_over_flowers_meme.jpg">
-<h3>Boys Over Flowers 🌸</h3>
+        <button onclick="next()">continuar</button>
+    </div>
 </div>
 
-<div class="item">
-<img src="images/escalera_al_cielo_meme.jpg">
-<h3>Escalera al Cielo ☁️</h3>
+<!-- EP3 -->
+<div class="scene" id="s3">
+    <div class="box">
+        <h2>Referencias mentales</h2>
+
+        <p>En mi cabeza esto fue un desastre tipo:</p>
+
+        <p> Boys Over Flowers: el protagonista arruinando todo en 3 segundos</p>
+        <p> Escalera al cielo: versión “yo complicando algo simple”</p>
+
+        <button onclick="next()">seguir</button>
+    </div>
 </div>
 
-<div class="item">
-<img src="images/lo_que_la_vida_me_robo_meme.jpg">
-<h3>Lo que la vida me robó 💀</h3>
+<!-- EP4 DISCURSO -->
+<div class="scene" id="s4">
+    <div class="box">
+        <h2>🖤 Disculpa</h2>
+
+        <p>Carla, perdón de verdad.</p>
+
+        <p>Cuando te dije que me gustabas </p>
+
+        <p>Pero después decir que “me habían retado” no fue la mejor forma de decirlo.</p>
+
+        <p>No era mi intención incomodarte ni hacerte sentir que esto era un juego</p>
+
+        <p>No era mi intención incomodarte ni hacerte sentir mal.</p>
+       <p>Me di cuenta después de cómo pudo sonar lo que dije, y entiendo completamente si te molestó o incomodó</p>
+        <p>Solo quería ser honesto contigo y pedirte perdón.
+        No quiero justificarlo, solo ser honesto contigo: me equivoqué en la forma. De verdad me importa que te sientas tranquila conmigo.</p>
+
+        <p style="margin-top:14px;color:#ff9ecf">— Zuricata</p>
+
+        <button onclick="next()">decisión</button>
+    </div>
 </div>
 
+<!-- DECISIÓN -->
+<div class="scene" id="s5">
+    <div class="box">
+        <h2>💔 Decisión final</h2>
+
+        <p>Después de todo esto…</p>
+
+        <button onclick="ending(true)">Perdonar</button>
+        <button class="no" onclick="ending(false)">No perdonar</button>
+    </div>
 </div>
 
+<!-- FINAL BUENO -->
+<div class="scene" id="yes">
+    <div class="box">
+        <h2>🖤 Final: Perdón</h2>
+        <p>Gracias por escucharme.</p>
+        <p>De verdad no era mi intención incomodarte.</p>
+        <p>Me alegra que esto esté bien.</p>
+    </div>
 </div>
 
-<div class="card">
-
-<h2>💬 Lo que realmente quería decir</h2>
-
-<p style="line-height:2; font-size:1.1rem;">
-Perdón si hice que pareciera juego o inmadurez.
-No quería hacerte sentir incómoda ni presionada.
-Solo me puse nervioso y salió horrible 😔
-</p>
-
-</div>
-
-<button class="button" onclick="mostrar()">
-Presiona aquí si aún no me odias 💌
-</button>
-
-<div id="final" class="hidden">
-
-<div class="card">
-
-<h2>💖 En serio...</h2>
-
-<p style="font-size:1.2rem; line-height:2;">
-Gracias por leer esto.
-Prometo que en mi cabeza sonaba más romántico y menos “payaso de Discord” 😭
-</p>
-
-<p style="color:#ffb3d4;">
-— Zuricata 🖤
-</p>
-
-</div>
-
-</div>
-
-<footer>
-Hecho con arrepentimiento y soundtrack imaginario de Romeo Santos 💔
-</footer>
-
+<!-- FINAL MALO -->
+<div class="scene" id="no">
+    <div class="box">
+        <h2>💔 Final: No perdón</h2>
+        <p>Lo entiendo.</p>
+        <p>No puedo cambiar lo que pasó.</p>
+        <p>Solo asumirlo.</p>
+    </div>
 </div>
 
 <script>
-function mostrar(){
-document.getElementById("final").style.display="block";
+
+/* lluvia */
+const rain=document.getElementById("rain");
+
+for(let i=0;i<60;i++){
+    let d=document.createElement("div");
+    d.className="drop";
+    d.style.left=Math.random()*100+"vw";
+    d.style.animationDuration=(0.6+Math.random()*1.5)+"s";
+    rain.appendChild(d);
 }
+
+/* pétalos */
+const petals=document.getElementById("petals");
+
+for(let i=0;i<25;i++){
+    let p=document.createElement("div");
+    p.className="petal";
+    p.style.left=Math.random()*100+"vw";
+    p.style.animationDuration=(5+Math.random()*6)+"s";
+    petals.appendChild(p);
+}
+
+/* escenas */
+let current=1;
+
+function next(){
+    document.getElementById("s"+current).classList.remove("active");
+    current++;
+    document.getElementById("s"+current).classList.add("active");
+}
+
+/* decisión */
+function ending(type){
+    document.getElementById("s5").classList.remove("active");
+
+    if(type){
+        document.getElementById("yes").classList.add("active");
+    } else {
+        document.getElementById("no").classList.add("active");
+    }
+}
+
 </script>
 
 </body>
