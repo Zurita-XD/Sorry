@@ -141,17 +141,16 @@ button{
 <div class="petals" id="petals"></div>
 
 <!-- 🎶 ROMEO SANTOS (DISCULPA MODE) -->
-<audio autoplay loop>
+<audio id="bgmusic" loop>
     <source src="https://dl.sndup.net/q7z2/Romeo%20Santos%20-%20Eres%20M%C3%ADa.mp3">
 </audio>
-
 <!-- EP1 -->
 <div class="scene active" id="s1">
     <div class="box">
         <h1>Perdón, Carla 🖤</h1>
         <p>No quiero incomodarte ni que esto se malinterprete.</p>
         <p>Solo quiero explicarme bien.</p>
-        <button onclick="next()">empezar</button>
+       <button onclick="next(); playMusic()">empezar</button>
     </div>
 </div>
 
@@ -242,7 +241,11 @@ button{
 </div>
 
 <script>
-
+function playMusic(){
+    const music = document.getElementById("bgmusic");
+    music.volume = 0.5; // volumen suave tipo K-drama
+    music.play();
+}
 /* lluvia */
 const rain=document.getElementById("rain");
 
