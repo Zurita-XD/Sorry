@@ -237,15 +237,10 @@ button{
 </div>
 
 <script>
-function start(){
-    const music = document.getElementById("bgmusic");
-    music.volume = 0.5;
 
-    music.play().catch(err => {
-        console.log("bloqueado por navegador");
-    });
+	function start(){
+document.getElementById("music").play()
 
-    next();
 }
 /* lluvia */
 const rain=document.getElementById("rain");
