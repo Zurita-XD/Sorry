@@ -140,17 +140,19 @@ button{
 <div class="rain" id="rain"></div>
 <div class="petals" id="petals"></div>
 
-<!-- 🎶 ROMEO SANTOS (DISCULPA MODE) -->
+<!-- 🎶 AUDIO LOCAL (ESTO ES LO QUE FUNCIONA) -->
 <audio id="bgmusic" loop preload="auto">
-    <source src="https://dl.sndup.net/q7z2/Romeo%20Santos%20-%20Eres%20M%C3%ADa.mp3" type="audio/mpeg">
+    <source src="audio/romeo.mp3" type="audio/mpeg">
 </audio>
+
 <!-- EP1 -->
 <div class="scene active" id="s1">
     <div class="box">
         <h1>Perdón, Carla 🖤</h1>
         <p>No quiero incomodarte ni que esto se malinterprete.</p>
         <p>Solo quiero explicarme bien.</p>
-       <button onclick="start()">empezar</button>
+
+        <button onclick="start()">empezar</button>
     </div>
 </div>
 
@@ -162,9 +164,8 @@ button{
         <p>Te dije que me gustabas…</p>
         <p>y luego dije que me habían retado.</p>
 
-        <p style="opacity:0.7">
-            ahora que lo pienso si fue inmaduro, no lo pense muy bien
-        </p>
+        <p style="opacity:0.7">ahora que lo piendo si fue muy inmaduro, no lo pense muy bien</p>
+
         <button onclick="next()">continuar</button>
     </div>
 </div>
@@ -172,34 +173,32 @@ button{
 <!-- EP3 -->
 <div class="scene" id="s3">
     <div class="box">
-        <h2>Referencias mentales</h2>
+        <h2>Referencias</h2>
 
-        <p>En mi cabeza esto fue un desastre tipo:</p>
-
-        <p> Boys Over Flowers: el protagonista arruinando todo en 3 segundos</p>
-        <p> Escalera al cielo: versión “yo complicando algo simple”</p>
+        <p>Boys Over Flowers: todo sale mal sin querer</p>
+        <p>Escalera al cielo: versión “yo complicando lo simple”</p>
 
         <button onclick="next()">seguir</button>
     </div>
 </div>
 
-<!-- EP4 DISCURSO -->
+<!-- EP4 -->
 <div class="scene" id="s4">
     <div class="box">
         <h2>🖤 Disculpa</h2>
 
         <p>Carla, perdón de verdad.</p>
 
-        <p>Cuando te dije que me gustabas </p>
+        <p>Cuando te dije que me gustabas.</p>
 
         <p>Pero después decir que “me habían retado” no fue la mejor forma de decirlo.</p>
 
         <p>No era mi intención incomodarte ni hacerte sentir que esto era un juego</p>
 
         <p>No era mi intención incomodarte ni hacerte sentir mal.</p>
-       <p>Me di cuenta después de cómo pudo sonar lo que dije, y entiendo completamente si te molestó o incomodó</p>
-        <p>Solo quería ser honesto contigo y pedirte perdón.
-        No quiero justificarlo, solo ser honesto contigo: me equivoqué en la forma. De verdad me importa que te sientas tranquila conmigo.</p>
+	<p> Me di cuenta después de cómo pudo sonar lo que dije, y entiendo completamente si te molestó o incomodó </p>
+
+        <p>Solo quería ser honesto contigo y pedirte perdón. No quiero justificarlo, solo ser honesto contigo: me equivoqué en la forma. De verdad me importa que te sientas tranquila conmigo.</p>
 
         <p style="margin-top:14px;color:#ff9ecf">— Zuricata</p>
 
@@ -219,52 +218,25 @@ button{
     </div>
 </div>
 
-<!-- FINAL BUENO -->
+<!-- FINAL -->
 <div class="scene" id="yes">
     <div class="box">
         <h2>🖤 Final: Perdón</h2>
         <p>Gracias por escucharme.</p>
-        <p>De verdad no era mi intención incomodarte.</p>
-        <p>Me alegra que esto esté bien.</p>
+        <p>No era mi intención incomodarte.</p>
     </div>
 </div>
 
-<!-- FINAL MALO -->
 <div class="scene" id="no">
     <div class="box">
         <h2>💔 Final: No perdón</h2>
         <p>Lo entiendo.</p>
         <p>No puedo cambiar lo que pasó.</p>
-        <p>Solo asumirlo.</p>
     </div>
 </div>
 
 <script>
-let musicStarted = false;
 
-function playMusic(){
-    const music = document.getElementById("bgmusic");
-
-    if (musicStarted) return;
-
-    music.volume = 0.5;
-
-    const playPromise = music.play();
-
-    if (playPromise !== undefined) {
-        playPromise
-        .then(() => {
-            musicStarted = true;
-        })
-        .catch(() => {
-            console.log("Autoplay bloqueado, esperando interacción...");
-        });
-    }
-}
-    function start(){
-    next();
-    playMusic();
-}
 /* lluvia */
 const rain=document.getElementById("rain");
 
@@ -294,6 +266,16 @@ function next(){
     document.getElementById("s"+current).classList.remove("active");
     current++;
     document.getElementById("s"+current).classList.add("active");
+}
+
+/* 🔥 MÚSICA (FUNCIONA SI O SI) */
+function start(){
+    next();
+    const music = document.getElementById("bgmusic");
+    music.volume = 0.5;
+    music.play().catch(e => {
+        console.log("El navegador bloqueó autoplay hasta interacción real");
+    });
 }
 
 /* decisión */
